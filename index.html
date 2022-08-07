@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐播放器</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="../音乐播放器/css/demo.css">
+</head>
+<body>
+    <div class="wrap">
+        <!-- 播放器主体区域 -->
+        <div class="player_wrap" id="player">
+            <!-- 搜索框 -->
+            <div class="search_bar">
+                <!-- v-model双向绑定数据，.enter绑定搜索方法 -->
+                <input type="text" v-model="query" @keyup.enter="searchMusic">
+            </div>
+
+            <!-- 中间区域 -->
+            <div class="center_con">
+                <!-- 歌曲列表 -->
+                <div class="song_wrapper">
+                    <ul class="song_list">
+                        <!-- 添加v-for -->
+                        <li v-for="item in musicList">
+                            <!-- 添加click点击事件，调用playMusic方法并传入id参数 -->
+                            <a href="javascript:;" @click="playMusic(item.id)"></a>
+                            <b>{{item.name}}</b>
+                            <span>
+                                <i></i>
+                            </span>
+                        </li>
+                    </ul>
+                    <img src="./imgs/line.png" class="switch_btn">
+                </div>
+                
+
+                <!-- 歌曲信息 -->
+                <!-- v-bind绑定类名，是否播放取决于isPlaying的值 -->
+                <div class="player_con" :class="{playing:isPlaying}">
+                    <img src="./imgs/player_bar.png" class="player_bar">
+                    <img src="./imgs/disc.png" class="disc autoRotate">
+                    <!-- v-bind修改属性设定封面 -->
+                    <img :src="musicCover" class="cover autoRotate">
+                </div>
+
+
+                <!-- 留言区域 -->
+                <div class="comment_wrapper">
+                    <h5 class="title">精选评论</h5>
+                    <div class="comment_list">
+                        <!-- 添加v-for -->
+                        <dl v-for="item in hotComments">
+                            <dt>
+                                <!-- v-bind修改头像地址 -->
+                                <img :src="item.user.avatarUrl" alt="">
+                            </dt>
+                            <dd class="name">{{item.user.nickname}}</dd>
+                            <dd class="detail">{{item.content}}</dd>
+                        </dl>
+                    </div>
+                    <img src="./imgs/line.png" class="right_line">
+                </div>
+            </div>
+            <!-- 歌曲播放 -->
+            <div class="audio_con">
+                <!-- v-bind缩写:，绑定src属性 -->
+                <!-- 绑定play、pause事件 -->
+                <audio ref='audio' @play="play" @pause="pause" :src="musicUrl" controls autoplay loop class="myaudio"></audio>
+            </div>
+        </div>
+        
+    </div>
+    <script src="./js/05-example2.js"></script>
+</body>
+</html>

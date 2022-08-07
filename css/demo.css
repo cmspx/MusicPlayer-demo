@@ -1,0 +1,259 @@
+.wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../imgs/bg3.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+
+.player_wrap {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 1100px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    /* background-color: aquamarine; */
+}
+
+.search_bar {
+    height: 60px;
+    /* 元素位于盒子纵轴中心 */
+    display: flex;
+    align-items:center;
+    background-color: #333;
+}
+
+.search_bar input {
+    width: 300px;
+    height: 30px;
+    border-radius: 17px;
+    margin-left: 30px;
+    border: 0px;
+    text-indent: 15px;
+    background: url("../imgs/zoom.png") 275px center no-repeat rgba(255, 255, 255, 0.45);
+    /* 点击无突出显示 */
+    outline: none;
+}
+
+.center_con {
+    height: 490px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    /* 父元素相对定位 */
+    position: relative;
+}
+
+.song_wrapper {
+    width: 300px;
+    height: 470px;
+    box-sizing: border-box;
+    padding: 10px;
+    list-style: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    /* background-color: blueviolet; */
+}
+
+.song_stretch {
+    width: 600px;
+  }
+
+.song_list {
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    list-style: none;
+    padding-left: 0;
+}
+
+.song_list::-webkit-scrollbar {
+    display: none;
+  }
+
+.song_list li {
+    height: 40px;
+    font-size: 12px;
+    color: #333;
+    line-height: 40px;
+    /* 让弹性盒在必要时拆行 */
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 10px;
+    /* background-color: bisque; */
+}
+
+.song_list li:nth-child(odd) {
+    background-color: rgba(240, 240, 240, 0.3);
+  }
+
+.song_list li a {
+    /* display: block; */
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-image: url("../imgs/play.png");
+    background-size: 100%;
+}
+
+.song_list li b {
+    font-weight: normal;
+}
+
+.switch_btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+
+.player_con {
+    width: 500px;
+    height: 480px;
+    position:absolute;
+    left: 300px;
+    /* background-color: brown; */
+}
+
+.player_bar {
+    position: absolute;
+    width: 100px;
+    left: 230px;
+    transform: rotate(-25deg);
+    transform-origin: 12px 12px;
+    transition: 1s;
+    z-index: 10;
+}
+
+.disc {
+    position: absolute;
+    width: 280px;
+    left: 110px;
+    top: 80px;
+    z-index: 9;
+}
+
+.cover {
+    position: absolute;
+    left: 150px;
+    top: 120px;
+    width: 200px;
+    height: 200px;
+    border-radius: 75px;
+    z-index: 8;
+  }
+
+.comment_wrapper {
+    width: 300px;
+    height: 480px;
+    position: absolute;
+    left: 800px;
+    /* background-color: blue; */
+}
+
+.right_line {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.comment_wrapper .title {
+    margin: 5px;
+}
+
+.comment_list {
+    overflow: auto;
+    height: 430px;
+    padding: 10px;
+    /* background-color: blueviolet; */
+}
+
+.comment_list::-webkit-scrollbar {
+    display: none;
+}
+
+.comment_list dl {
+    /* width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    padding-left: 0;
+    margin-top: 0px;
+    position: relative; */
+    /* background-color: blueviolet; */
+    padding-top: 10px;
+    position: relative;
+    /* margin-bottom: 20px; */
+}
+
+.comment_list dt {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+}
+
+.comment_list dt img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.comment_list dd {
+    font-size: 15px;
+    margin-left: 62px;
+}
+
+.comment_list .name {
+    font-weight: bold;
+    color: #333;
+    margin-top: 7px;
+}
+
+.comment_list .detail {
+    color: #666;
+}
+
+.audio_con {
+    height: 60px;
+    background-color: #f1f3f4;
+}
+
+.myaudio {
+    width: 1100px;
+    height: 50px;
+    margin-top: 6px;
+}
+
+/* 旋转的动画 */
+@keyframes Rotate {
+    from {
+      transform: rotateZ(0);
+    }
+    to {
+      transform: rotateZ(360deg);
+    }
+}
+
+.autoRotate {
+    animation-name: Rotate;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+    animation-timing-function: linear;
+    animation-duration: 5s;
+}
+
+.player_con.playing .disc,
+.player_con.playing .cover {
+  animation-play-state: running;
+}
+
+/* 播放杆转回 */
+.player_con.playing .player_bar {
+    transform: rotate(0);
+  }
